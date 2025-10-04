@@ -4,7 +4,7 @@ import { Expo } from "expo-server-sdk";
 import { sendPushNotifications } from "./lib/utils";
 import cors, { CorsOptions } from "cors";
 import { config } from "dotenv";
-import { PrismaClient } from "./generated/prisma"; // relative to your source folder
+import { PrismaClient } from "../generated/prisma"; // relative to your source folder
 config();
 const db = new PrismaClient()
 const app = express();
