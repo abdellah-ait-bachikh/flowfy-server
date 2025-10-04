@@ -1,6 +1,6 @@
 import express, { Request, Response } from "express";
 import bodyParser from "body-parser";
-import { Expo,  } from "expo-server-sdk";
+import { Expo } from "expo-server-sdk";
 import { sendPushNotifications } from "./lib/utils";
 import cors, { CorsOptions } from "cors";
 import { config } from "dotenv";
@@ -48,6 +48,10 @@ app.post("/send-notification", async (req: Request, res: Response) => {
     console.error(error);
     res.status(500).json({ success: false, error });
   }
+});
+
+app.get("/hellow", (req: Request, res: Response) => {
+  res.json({ message: "hellow world" });
 });
 
 app.listen(port, () => {
