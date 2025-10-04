@@ -4,7 +4,9 @@ import { Expo } from "expo-server-sdk";
 import { sendPushNotifications } from "./lib/utils";
 import cors, { CorsOptions } from "cors";
 import { config } from "dotenv";
+import { PrismaClient } from "./generated/prisma"; // relative to your source folder
 config();
+const db = new PrismaClient()
 const app = express();
 const port = process.env.PORT || 8000;
 const corsOption: CorsOptions = {
@@ -52,6 +54,15 @@ app.post("/send-notification", async (req: Request, res: Response) => {
 
 app.get("/hellow", (req: Request, res: Response) => {
   res.json({ message: "hellow world" });
+});
+app.get("/users", async(req: Request, res: Response) => {
+  try {
+    const users = await db.user.findMany()
+    res.json(users)
+  } catch (error) {
+    res.json(error)
+  }
+ 
 });
 
 app.listen(port, () => {
